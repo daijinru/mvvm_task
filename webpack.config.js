@@ -1,18 +1,18 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 // 多页面入口配置
-const {ENTRIES, TEMPLATES} = require('./entries.config.js');
+const {ENTRIES, TEMPLATES} = require('./entries.config.js')
 let WebpackPlugins = []
 
 // 抽离样式文件
 const extractTextPluginConfig = new ExtractTextPlugin({
   filename: '[name].css?[chunkhash]',
   allChunks: true
-});
-WebpackPlugins.push(extractTextPluginConfig);
+})
+WebpackPlugins.push(extractTextPluginConfig)
 
 // 生成 htmlWebpackPlugin 配置集合
 WebpackPlugins = WebpackPlugins.concat(TEMPLATES.map(item => {
@@ -20,8 +20,8 @@ WebpackPlugins = WebpackPlugins.concat(TEMPLATES.map(item => {
 }))
 
 // 每一次打包前清理 dist/
-const cleanWebpackPlugin = new CleanWebpackPlugin();
-WebpackPlugins.push(cleanWebpackPlugin);
+const cleanWebpackPlugin = new CleanWebpackPlugin()
+WebpackPlugins.push(cleanWebpackPlugin)
 
 module.exports = {
     mode: 'development',
@@ -51,4 +51,4 @@ module.exports = {
         host: '127.0.0.1',
         port: 8080
     }
-};
+}
